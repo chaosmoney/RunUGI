@@ -12,49 +12,126 @@ public class Test03UIStageController : MonoBehaviour
     }
 
     [SerializeField]
-    private Button[] stages;
+    private GameObject[] stages;
+    [SerializeField]
+    private Button[] doings;
+    [SerializeField]
+    private GameObject[] clearStars;
+    [SerializeField]
+    private TMPro.TMP_Text[] doingTexts;
+    [SerializeField]
+    private TMPro.TMP_Text[] completeTexts;
+    [SerializeField]
+    private TMPro.TMP_Text statusStars;
 
-    private int doingStage = 0;
+    private int getStars;
+    private int totalStars;
 
-    public UnityAction nextStageOpen;
-    // Start is called before the first frame update
-    void Start()
+    private int Lock = (int)eState.Lock;
+    private int Doing = (int)eState.Doing;
+    private int Complete = (int)eState.Complete;
+
+    private int[] stagesState;
+
+    private void Start()
     {
         Init();
-
-        for(int i = 0; i < stages.Length; i++)
+        for (int i = 0; i < doings.Length; i++)
         {
-            Test03UIStage stage = stages[i].GetComponent<Test03UIStage>();
-            if(i == 0)
+            int j = i;
+            this.doings[i].onClick.AddListener(() =>
             {
-                stage.ChangeState(1);
-            }
-            this.stages[i].onClick.AddListener(() =>
-            {
-                if (stage.state == 1)
+                if (stages[j] == stages[stages.Length - 1])
                 {
-                    stage.ChangeState(2);
+                    this.stages[j].transform.GetChild(1).gameObject.SetActive(false);
+                    this.stages[j].transform.GetChild(2).gameObject.SetActive(true);
                 }
+                else
+                {
+                    this.stages[j].transform.GetChild(1).gameObject.SetActive(false);
+                    this.stages[j].transform.GetChild(2).gameObject.SetActive(true);
+
+                    this.stages[j + 1].transform.GetChild(0).gameObject.SetActive(false);
+                    this.stages[j + 1].transform.GetChild(1).gameObject.SetActive(true);
+                }
+
+                InitStars(j);
+                StatusStar();
 
             });
         }
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+
     }
 
     private void Init()
     {
+        this.stagesState = new int[this.stages.Length];
         for (int i = 0; i < stages.Length; i++)
         {
-            this.stages[i].transform.GetChild(0).gameObject.SetActive(false);
-            this.stages[i].transform.GetChild(1).gameObject.SetActive(false);
-            this.stages[i].transform.GetChild(2).gameObject.SetActive(false);
-
-            this.stages[i].transform.GetChild(0).gameObject.SetActive(true);
+            ChangeState(i,Lock);
+            doingTexts[i].text = (i+1).ToString();
+            completeTexts[i].text = (i+1).ToString();
         }
+        ChangeState(0, Doing);
+
+        this.totalStars = stages.Length * 3;
+
+        for (int i = 0; i < stagesState.Length; i++)
+        {
+            Debug.Log(stagesState[i]);
+        }
+    }
+
+    private void InitStars(int j)
+    {
+        int random = Random.Range(0, 4);
+        switch (random)
+        {
+            case 0:
+                clearStars[j].transform.GetChild(0).gameObject.SetActive(false);
+                clearStars[j].transform.GetChild(1).gameObject.SetActive(false);
+                clearStars[j].transform.GetChild(2).gameObject.SetActive(false);
+                break;
+            case 1:
+                clearStars[j].transform.GetChild(0).gameObject.SetActive(true);
+                clearStars[j].transform.GetChild(1).gameObject.SetActive(false);
+                clearStars[j].transform.GetChild(2).gameObject.SetActive(false);
+                getStars += 1;
+                break;
+            case 2:
+                clearStars[j].transform.GetChild(0).gameObject.SetActive(true);
+                clearStars[j].transform.GetChild(1).gameObject.SetActive(true);
+                clearStars[j].transform.GetChild(2).gameObject.SetActive(false);
+                getStars += 2;
+                break;
+            case 3:
+                clearStars[j].transform.GetChild(0).gameObject.SetActive(true);
+                clearStars[j].transform.GetChild(1).gameObject.SetActive(true);
+                clearStars[j].transform.GetChild(2).gameObject.SetActive(true);
+                getStars += 3;
+                break;
+        }
+    }
+
+    private void ChangeState(int i,int state)
+    {
+        this.stages[i].transform.GetChild(Lock).gameObject.SetActive(false);
+        this.stages[i].transform.GetChild(Doing).gameObject.SetActive(false);
+        this.stages[i].transform.GetChild(Complete).gameObject.SetActive(false);
+        this.stages[i].transform.GetChild(state).gameObject.SetActive(true);
+        this.stagesState[i] = state;
+    }
+
+    private void StatusStar()
+    {
+        statusStars.text = getStars.ToString() +" / "+ totalStars.ToString();
+    }
+
+    public int StatusStage()
+    {
+        return stages.Length; 
     }
 }

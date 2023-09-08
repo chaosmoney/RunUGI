@@ -1,0 +1,37 @@
+[
+  {
+    "id": "100",
+    "name": "나무상자",
+    "type": "0",
+    "price": "100",
+    "sprite_name": "shop_img_chest_close_m_00"
+  },
+  {
+    "id": "101",
+    "name": "실버상자",
+    "type": "1",
+    "price": "600",
+    "sprite_name": "shop_img_chest_close_m_01"
+  },
+  {
+    "id": "102",
+    "name": "골드상자",
+    "type": "2",
+    "price": "1000",
+    "sprite_name": "shop_img_chest_close_m_02"
+  },
+  {
+    "id": "103",
+    "name": "에픽상자",
+    "type": "3",
+    "price": "3000",
+    "sprite_name": "shop_img_chest_close_m_03"
+  },
+  {
+    "id": "104",
+    "name": "전설상자",
+    "type": "4",
+    "price": "6000",
+    "sprite_name": "shop_img_chest_close_m_04"
+  }
+]

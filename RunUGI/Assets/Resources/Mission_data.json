@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1000",
+    "name": "Collect Golds",
+    "desc": "Collect 10000 Golds",
+    "goal": "10000",
+    "icon_name": "icon_coins_pouch",
+    "reward_amount": "1",
+    "reward_icon_name": "icon_color_energy"
+  },
+  {
+    "id": "1001",
+    "name": "Climb the ranks",
+    "desc": "Play 5 times",
+    "goal": "5",
+    "icon_name": "icon_dungeon",
+    "reward_amount": "1",
+    "reward_icon_name": "icon_gemstone_rune"
+  },
+  {
+    "id": "1002",
+    "name": "Level Up",
+    "desc": "5 Level up characters",
+    "goal": "5",
+    "icon_name": "icon_equip_helmet_1",
+    "reward_amount": "3",
+    "reward_icon_name": "icon_bomb"
+  },
+  {
+    "id": "1003",
+    "name": "Ad Break",
+    "desc": "Watch 5 Ads",
+    "goal": "5",
+    "icon_name": "icon_tv",
+    "reward_amount": "1",
+    "reward_icon_name": "icon_potion_red"
+  },
+  {
+    "id": "1004",
+    "name": "Technician",
+    "desc": "Use skills 6 times",
+    "goal": "6",
+    "icon_name": "icon_book_1",
+    "reward_amount": "500",
+    "reward_icon_name": "icon_coins"
+  }
+]
